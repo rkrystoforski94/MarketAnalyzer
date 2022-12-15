@@ -2,18 +2,21 @@
 #include "MarketLiveAnalyzer.h"
 #include <QtWidgets/QApplication>
 #include <iostream>
+#include "Log.h"
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MarketLiveAnalyzer w;
+    Log log;
     w.show();
 
-    qDebug() << "Test Print";
+    log.setLogLevel(Log::LogLevelError);
 
-    qInfo() << "Test Print2";
-   
+    log.Error("Test Message");
+    log.Info("Test Message");
+    log.Warning("Test Message");
 
     return a.exec();
 }

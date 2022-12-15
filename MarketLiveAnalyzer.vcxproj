@@ -65,7 +65,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -98,14 +98,12 @@
     <QtRcc Include="MarketLiveAnalyzer.qrc" />
     <QtUic Include="MarketLiveAnalyzer.ui" />
     <QtMoc Include="MarketLiveAnalyzer.h" />
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="MarketLiveAnalyzer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClInclude Include="IDataApi.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="stdafx.h" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
