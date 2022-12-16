@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Log.h"
 
+using namespace app::logger;
 
 int main(int argc, char *argv[])
 {
@@ -17,6 +18,8 @@ int main(int argc, char *argv[])
     log.Error("Test Message");
     log.Info("Test Message");
     log.Warning("Test Message");
+
+    log.fnError("failed with -1", "main");
 
     return a.exec();
 }

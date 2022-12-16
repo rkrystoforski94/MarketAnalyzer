@@ -1,31 +1,45 @@
 #include "Log.h"
 
+namespace app {
+namespace logger {
 
-void Log::setLogLevel(LogLevel logLevel)
-{
-	m_LogLevel = logLevel;
-}
-
-void Log::Info(const char* message)
-{
-	if (m_LogLevel >= LogLevelInfo)
+	void Log::setLogLevel(LogLevel logLevel)
 	{
-		qDebug() << "[INFO]:" << message;
+		m_LogLevel = logLevel;
 	}
-}
 
-void Log::Warning(const char* message)
-{
-	if (m_LogLevel >= LogLevelWarning)
+	void Log::Info(const char* message)
 	{
-		qDebug() << "[WARNING]:" << message;
+		if (m_LogLevel >= LogLevelInfo)
+		{
+			qDebug() << "[INFO]:" << message;
+		}
 	}
-}
 
-void Log::Error(const char* message)
-{
-	if (m_LogLevel >= LogLevelError)
+	void Log::Warning(const char* message)
 	{
-		qDebug() << "[ERROR]" << message;
+		if (m_LogLevel >= LogLevelWarning)
+		{
+			qDebug() << "[WARNING]:" << message;
+		}
 	}
-}
+
+	void Log::Error(const char* message)
+	{
+		if (m_LogLevel >= LogLevelError)
+		{
+			qDebug() << "[ERROR]" << message;
+		}
+	}
+
+	void Log::fnError(const char* message, const char* fnName)
+	{
+		if (m_LogLevel >= LogLevelError)
+		{
+			qDebug() << "[ERROR]:" << "Function " << fnName
+				 << message;
+		}
+	}
+
+} // namespace logger
+} // namespace app
