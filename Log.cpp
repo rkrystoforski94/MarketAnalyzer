@@ -3,43 +3,43 @@
 namespace app {
 namespace logger {
 
-	void Log::setLogLevel(LogLevel logLevel)
-	{
-		m_LogLevel = logLevel;
-	}
+void Log::setLogLevel(LogLevel logLevel)
+{
+	m_LogLevel = logLevel;
+}
 
-	void Log::Info(const char* message)
+void Log::Info(const char* message)
+{
+	if (m_LogLevel >= LogLevelInfo)
 	{
-		if (m_LogLevel >= LogLevelInfo)
-		{
-			qDebug() << "[INFO]:" << message;
-		}
+		qDebug() << "[INFO]:" << message;
 	}
+}
 
-	void Log::Warning(const char* message)
+void Log::Warning(const char* message)
+{
+	if (m_LogLevel >= LogLevelWarning)
 	{
-		if (m_LogLevel >= LogLevelWarning)
-		{
-			qDebug() << "[WARNING]:" << message;
-		}
+		qDebug() << "[WARNING]:" << message;
 	}
+}
 
-	void Log::Error(const char* message)
+void Log::Error(const char* message)
+{
+	if (m_LogLevel >= LogLevelError)
 	{
-		if (m_LogLevel >= LogLevelError)
-		{
-			qDebug() << "[ERROR]" << message;
-		}
+		qDebug() << "[ERROR]" << message;
 	}
+}
 
-	void Log::fnError(const char* message, const char* fnName)
+void Log::fnError(const char* message, const char* fnName)
+{
+	if (m_LogLevel >= LogLevelError)
 	{
-		if (m_LogLevel >= LogLevelError)
-		{
-			qDebug() << "[ERROR]:" << "Function " << fnName
-				 << message;
-		}
+		qDebug() << "[ERROR]:" << "Function " << fnName
+				<< message;
 	}
+}
 
 } // namespace logger
 } // namespace app
