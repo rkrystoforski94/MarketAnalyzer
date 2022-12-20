@@ -40,7 +40,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\source\repos\QtWidgetsApplication1\MarketAnalyzer\Log.cpp">
+    <ClCompile Include="Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -48,7 +48,7 @@
     <ClInclude Include="IDataApi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\source\repos\QtWidgetsApplication1\MarketAnalyzer\Log.h">
+    <ClInclude Include="Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

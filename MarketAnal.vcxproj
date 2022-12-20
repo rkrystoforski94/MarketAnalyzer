@@ -88,12 +88,12 @@
     <QtRcc Include="MarketAnal.qrc" />
     <QtUic Include="MarketAnal.ui" />
     <QtMoc Include="MarketAnal.h" />
-    <ClCompile Include="..\..\..\..\source\repos\QtWidgetsApplication1\MarketAnalyzer\Log.cpp" />
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="MarketAnal.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\source\repos\QtWidgetsApplication1\MarketAnalyzer\Log.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="IDataApi.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
