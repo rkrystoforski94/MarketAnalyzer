@@ -10,12 +10,24 @@ namespace app {
 namespace logger {
 
 template <typename T>
-void func2(std::tuple<T> list)
+void MagicLog(std::ostream& o, T t)
 {
-	for (auto elem : list)
-	{
-		std::cout << elem << std::endl;
-	}
+	o << t << ", ";
+}
+
+template<typename T, typename... Args>
+void MagicLog(std::ostream& o, T t, Args... args) // recursive variadic function
+{
+	MagicLog(o, t);
+	MagicLog(o, args...);
+}
+
+template<typename... Args>
+void dbgIn(std::string logType, Args... args)
+{
+	std::ostringstream oss;
+	MagicLog(oss, args...);
+	qDebug() << QString::fromStdString(logType) << QString::fromStdString(oss.str());
 }
 
 class Log
@@ -41,9 +53,8 @@ public:
 
 	void fnError(const char* message, const char* fnName);
 
-
-
 	~Log() = default;
+
 private:
 	LogLevel m_LogLevel = LogLevelError;
 };

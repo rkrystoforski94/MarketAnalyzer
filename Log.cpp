@@ -3,10 +3,7 @@
 namespace app {
 namespace logger {
 
-void Log::setLogLevel(LogLevel logLevel)
-{
-	m_LogLevel = logLevel;
-}
+
 
 void Log::Info(const char* message)
 {
