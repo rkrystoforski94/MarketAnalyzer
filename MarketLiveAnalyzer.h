@@ -1,10 +1,10 @@
 #pragma once
 
-#include <QtWidgets/QWidget>
-#include "ui_MarketLiveAnalyzer.h"
-#include <QDebug>
+#include <QtWidgets/QMainWindow>
+#include "ui_QtWidgetsApplication1.h"
+#include <qdebug.h>
 
-class MarketLiveAnalyzer : public QWidget
+class MarketLiveAnalyzer : public QMainWindow
 {
     Q_OBJECT
 
@@ -12,8 +12,9 @@ public:
     MarketLiveAnalyzer(QWidget *parent = nullptr);
     ~MarketLiveAnalyzer();
 
-private:
-    Ui::MarketLiveAnalyzerClass ui;
+private slots:
+    void on_testBtn_clicked();
 
-    void on_show_market_clicked();
+private:
+    Ui::QtWidgetsApplication1Class ui;
 };
