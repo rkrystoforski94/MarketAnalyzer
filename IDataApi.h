@@ -1,7 +1,6 @@
 #pragma once
 #include <sstream>
 
-
 namespace data_api
 {
 // General interface for play with our data

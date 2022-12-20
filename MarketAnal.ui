@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QtWidgetsApplication1Class</class>
- <widget class="QMainWindow" name="QtWidgetsApplication1Class">
+ <class>MarketAnalClass</class>
+ <widget class="QMainWindow" name="MarketAnalClass">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,20 +11,20 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>QtWidgetsApplication1</string>
+   <string>MarketAnal</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="testBtn">
+   <widget class="QPushButton" name="showMarketBtn">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>190</y>
-      <width>75</width>
-      <height>24</height>
+      <x>20</x>
+      <y>280</y>
+      <width>101</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Show Market</string>
     </property>
    </widget>
   </widget>
@@ -50,7 +50,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="QtWidgetsApplication1.qrc"/>
+  <include location="MarketAnal.qrc"/>
  </resources>
  <connections/>
 </ui>
