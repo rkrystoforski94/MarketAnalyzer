@@ -1,4 +1,5 @@
 #include "MarketAnal.h"
+#include "stockapi.h"
 
 MarketAnal::MarketAnal(QWidget *parent)
     : QMainWindow(parent)
@@ -11,5 +12,6 @@ MarketAnal::~MarketAnal()
 
 void MarketAnal::on_showMarketBtn_clicked()
 {
-    qDebug() << "Test";
+    stockapi_init( 123, 234);
+    qDebug() << "Test " << get_previous_();
 }
