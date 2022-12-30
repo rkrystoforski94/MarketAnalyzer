@@ -7,6 +7,11 @@ You may need to change it to work.
 Because of many changes with solution paths, I needed to push with that change.
 You can change it like it was before my push.
 
+Also built MarketAnal  project creates executable "MarketAnal.exe". Run throws error which indicates
+missing dlls:
+Qt6Widgetsd.dll
+Qt6Cored.dll
+
 P.S.
 If you decide this note is not required or important for this project, please remove it.
 If you don't mind,  leave it as it is. In the future, there should be installation/use instructions.
