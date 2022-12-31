@@ -1,16 +1,22 @@
 // stockapi.h - Contains declarations of math functions
 #pragma once
+#include <string>
 
-#ifdef PLIKH_EXPORTS
-#define PLIKH_API __declspec(dllexport)
+#ifdef STOCKAPIH_EXPORTS
+#define STOCKAPIH_API __declspec(dllexport)
 #else
-#define PLIKH_API __declspec(dllimport)
+#define STOCKAPIH_API __declspec(dllimport)
 #endif
 
+namespace sa {
 
-extern "C" PLIKH_API void stockapi_init(
-    const unsigned long long a, const unsigned long long b);
+    extern "C" STOCKAPIH_API void stockapi_init(
+        const unsigned long long a, const unsigned long long b);
 
-extern "C" PLIKH_API bool test_request();
+    extern "C" STOCKAPIH_API bool test_request();
 
-extern "C" PLIKH_API unsigned long long get_previous_();
+    extern "C" STOCKAPIH_API unsigned long long get_previous_();
+
+    extern "C" STOCKAPIH_API std::string get_stock_price(std::string stockName);
+
+}

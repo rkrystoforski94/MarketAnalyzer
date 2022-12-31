@@ -12,6 +12,7 @@ MarketAnal::~MarketAnal()
 
 void MarketAnal::on_showMarketBtn_clicked()
 {
-    stockapi_init( 123, 234);
-    qDebug() << "Test " << get_previous_();
+    std::string stockFullNameLocal = "apple-computer-inc";
+    std::string APPLE_price = sa::get_stock_price(stockFullNameLocal);
+    qDebug() << "Cena apple: " << APPLE_price.c_str();
 }
