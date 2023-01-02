@@ -1,7 +1,11 @@
+#ifndef MARKETANAL_H
+#define MARKETANAL_H
+
 #pragma once
 
 #include <QtWidgets/QMainWindow>
 #include "ui_MarketAnal.h"
+#include "Log.h"
 
 class MarketAnal : public QMainWindow
 {
@@ -15,4 +19,8 @@ private slots:
 
 private:
     Ui::MarketAnalClass ui;
+    app::logger::Log log;
 };
+
+
+#endif // !MARKETANAL_H

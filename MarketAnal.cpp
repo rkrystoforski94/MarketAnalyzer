@@ -15,4 +15,6 @@ void MarketAnal::on_showMarketBtn_clicked()
     std::string stockFullNameLocal = "apple-computer-inc";
     std::string APPLE_price = sa::get_stock_price(stockFullNameLocal);
     qDebug() << "Cena apple: " << APPLE_price.c_str();
+
+    log.fnError(__FUNCTION__, "Test message");
 }

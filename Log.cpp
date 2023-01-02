@@ -29,11 +29,11 @@ void Log::Error(const char* message)
 	}
 }
 
-void Log::fnError(const char* message, const char* fnName)
+void Log::fnError(const char* fnName, const char* message)
 {
 	if (m_LogLevel >= LogLevelError)
 	{
-		qDebug() << "[ERROR]:" << "Function " << fnName
+		qDebug() << "[ERROR]:" << "Function" << fnName
 				<< message;
 	}
 }

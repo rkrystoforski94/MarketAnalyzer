@@ -1,3 +1,6 @@
+#ifndef LOGGER_H
+#define LOGGER_H
+
 #include <iostream>
 #include <string>
 #include <QtWidgets/QApplication>
@@ -5,6 +8,7 @@
 #include <sstream>
 #include <initializer_list>
 #include <tuple>
+#include <source_location>
 
 namespace app {
 namespace logger {
@@ -31,7 +35,7 @@ void dbgIn(std::string logType, Args... args)
 }
 
 class Log
-	{
+{
 public:
 	enum LogLevel
 	{
@@ -61,3 +65,5 @@ private:
 
 } //namespace logger
 } // namespace app
+
+#endif
