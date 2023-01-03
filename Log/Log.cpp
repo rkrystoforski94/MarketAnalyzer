@@ -3,7 +3,7 @@
 namespace app {
 namespace logger {
 
-
+#ifdef DBG_MODE
 
 void Log::Info(const char* message)
 {
@@ -37,6 +37,14 @@ void Log::fnError(const char* fnName, const char* message)
 				<< message;
 	}
 }
+
+#else
+	void Log::Info(const char* message) {};
+	void Log::Warning(const char* message) {};
+	void Log::Error(const char* message) {};
+
+	void Log::fnError(const char* message, const char* fnName) {};
+#endif // DBG_MODE
 
 } // namespace logger
 } // namespace app

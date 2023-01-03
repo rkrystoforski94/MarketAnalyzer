@@ -13,6 +13,8 @@
 namespace app {
 namespace logger {
 
+#ifdef DBG_MODE
+
 template <typename T>
 void MagicLog(std::ostream& o, T t)
 {
@@ -33,6 +35,8 @@ void dbgIn(std::string logType, Args... args)
 	MagicLog(oss, args...);
 	qDebug() << QString::fromStdString(logType) << QString::fromStdString(oss.str());
 }
+
+#endif // DBG_MODE
 
 class Log
 {
