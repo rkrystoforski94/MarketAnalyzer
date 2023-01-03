@@ -96,16 +96,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="MarketAnal.qrc" />
-    <QtUic Include="MarketAnal.ui" />
-    <QtMoc Include="MarketAnal.h" />
-    <ClCompile Include="Log.cpp" />
-    <ClCompile Include="MarketAnal.cpp" />
+    <QtRcc Include="MainApp\MarketAnal.qrc" />
+    <QtUic Include="MainApp\MarketAnal.ui" />
+    <QtMoc Include="MainApp\MarketAnal.h" />
+    <ClCompile Include="Log\Log.cpp" />
+    <ClCompile Include="MainApp\MarketAnal.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Log.h" />
-    <ClInclude Include="IDataApi.h" />
+    <ClInclude Include="Log\Log.h" />
+    <ClInclude Include="MainApp\IDataApi.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="InvestingCPR\InvestingCPR.vcxproj">

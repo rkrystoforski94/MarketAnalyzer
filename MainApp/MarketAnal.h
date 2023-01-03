@@ -5,7 +5,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_MarketAnal.h"
-#include "Log.h"
+#include "../Log/Log.h"
 
 class MarketAnal : public QMainWindow
 {

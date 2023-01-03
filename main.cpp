@@ -1,4 +1,4 @@
-#include "MarketAnal.h"
+#include "MainApp/MarketAnal.h"
 #include <QtWidgets/QApplication>
 
 
