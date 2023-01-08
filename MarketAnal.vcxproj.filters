@@ -23,16 +23,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="MarketAnal.qrc">
+    <QtRcc Include="MainApp\MarketAnal.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-    <QtUic Include="MarketAnal.ui">
+    <QtUic Include="MainApp\MarketAnal.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtMoc Include="MarketAnal.h">
+    <QtMoc Include="MainApp\MarketAnal.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClCompile Include="MarketAnal.cpp">
+    <ClCompile Include="MainApp\MarketAnal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -40,15 +40,15 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Log.cpp">
+    <ClCompile Include="Log\Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IDataApi.h">
+    <ClInclude Include="MainApp\IDataApi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Log.h">
+    <ClInclude Include="Log\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

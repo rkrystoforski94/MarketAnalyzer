@@ -6,12 +6,13 @@
 #include <QtWidgets/QApplication>
 #include <QDebug>
 #include <sstream>
-#include <initializer_list>
-#include <tuple>
-#include <source_location>
+#include <fstream>
+#include <iomanip>
 
 namespace app {
 namespace logger {
+
+#ifdef DBG_MODE
 
 template <typename T>
 void MagicLog(std::ostream& o, T t)
@@ -34,6 +35,8 @@ void dbgIn(std::string logType, Args... args)
 	qDebug() << QString::fromStdString(logType) << QString::fromStdString(oss.str());
 }
 
+#endif // DBG_MODE
+
 class Log
 {
 public:
@@ -44,7 +47,7 @@ public:
 		LogLevelError
 	};
 public:
-	Log() = default;
+	Log();
 	Log(LogLevel level) : m_LogLevel(level) {};
 	Log(const Log&) = delete;
 	Log(const Log&&) = delete;
@@ -57,10 +60,11 @@ public:
 
 	void fnError(const char* message, const char* fnName);
 
-	~Log() = default;
+	~Log();
 
 private:
-	LogLevel m_LogLevel = LogLevelError;
+	LogLevel m_LogLevel;
+	std::fstream m_fileName;
 };
 
 } //namespace logger

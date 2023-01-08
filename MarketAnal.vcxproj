@@ -62,12 +62,17 @@
     <ClCompile>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(Qt_INCLUDEPATH_);./InvestingCPR;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <PreprocessorDefinitions>LOG_TO_FILE=1;DBG_MODE</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>./InvestingCPR;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>LOG_TO_FILE=0</PreprocessorDefinitions>
     </ClCompile>
+    <QtRcc>
+      <PreprocessorDefinitions>RELEASE_MODE;</PreprocessorDefinitions>
+    </QtRcc>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
@@ -96,16 +101,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <QtRcc Include="MarketAnal.qrc" />
-    <QtUic Include="MarketAnal.ui" />
-    <QtMoc Include="MarketAnal.h" />
-    <ClCompile Include="Log.cpp" />
-    <ClCompile Include="MarketAnal.cpp" />
+    <QtRcc Include="MainApp\MarketAnal.qrc" />
+    <QtUic Include="MainApp\MarketAnal.ui" />
+    <QtMoc Include="MainApp\MarketAnal.h" />
+    <ClCompile Include="Log\Log.cpp" />
+    <ClCompile Include="MainApp\MarketAnal.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Log.h" />
-    <ClInclude Include="IDataApi.h" />
+    <ClInclude Include="Log\Log.h" />
+    <ClInclude Include="MainApp\IDataApi.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="InvestingCPR\InvestingCPR.vcxproj">
