@@ -15,5 +15,10 @@ private:
 
 public:
     std::string GetCurrentPrice();
-
+    std::string GetPrevClosePrice();
+    std::string GetOpenPrice();
+    std::string GetDayRangePrice();
+    std::string Get52wRangePrice();
+    std::string GetAbsoluteChange();
+    std::string GetProcentChange();
 };
