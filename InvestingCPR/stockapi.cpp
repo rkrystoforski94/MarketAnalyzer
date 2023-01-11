@@ -20,6 +20,11 @@ static unsigned long long current_;
 static unsigned index_;
 static std::string _getStockPrice;
 static std::string _getPrevClosePrice;
+static std::string _getOpenPrice;
+static std::string _getDayRangePrice;
+static std::string _getWeekRangePrice;
+static std::string _getAbsChangePrice;
+static std::string _getProcentChangePrice;
 
 
 void sa::stockapi_init(
@@ -56,20 +61,13 @@ std::string sa::get_stock_price(std::string stockName)
 {
     std::string url = "https://www.investing.com/equities/";
     url.append(stockName);
-    //std::string *response;
     std::shared_ptr<std::string> response = std::make_shared<std::string>();
-    
-    cpr::Response r = cpr::Get(
-        cpr::Url{ url },
-        cpr::Authentication{ "user", "pass", cpr::AuthMode::BASIC },
-        cpr::Parameters{ {"anon", "true"}, {"key", "value"} },
-        cpr::Header{ {"accept", "application/json"}, {"User - Agent", "Mozilla / 5.0 (Windows NT 10.0; Win64; x64) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 108.0.0.0 Safari / 537.36"} });
-    *response = r.text;
+    get_response(url, response);  // set response
 
     std::vector<const char*> divTag;
     divTag.push_back("instrument-price-last");
     get_tagdata_from_response(divTag, response, _getStockPrice);
-    
+
     return _getStockPrice;
 }
 
@@ -81,36 +79,138 @@ std::string sa::get_prev_close_price(std::string stockName)
     get_response(url, response);  // set response
 
     std::vector<const char*> divTag;
-    divTag.push_back("key-info_dd-numeric__5IsvY");
+    divTag.push_back("data-test=\"prevClose\"");
+    divTag.push_back("class=\"key-info_dd-numeric__5IsvY\"");
     divTag.push_back("span");
     get_tagdata_from_response(divTag, response, _getPrevClosePrice);
 
     return _getPrevClosePrice;
 }
 
-std::string sa::get_open_price()
+std::string sa::get_open_price(std::string stockName)
 {
-    return "54321.09876";
+    std::string url = "https://www.investing.com/equities/";
+    url.append(stockName);
+    std::shared_ptr<std::string> response = std::make_shared<std::string>();
+    get_response(url, response);  // set response
+
+    std::vector<const char*> divTag;
+    divTag.push_back("data-test=\"open\"");
+    divTag.push_back("class=\"key-info_dd-numeric__5IsvY\"");
+    divTag.push_back("span");
+    get_tagdata_from_response(divTag, response, _getOpenPrice);
+
+    return _getOpenPrice;
 }
 
-std::string sa::get_day_range_price()
+std::string sa::get_day_range_price(std::string stockName)
 {
-    return "54321.09876";
+    std::string url = "https://www.investing.com/equities/";
+    url.append(stockName);
+    std::shared_ptr<std::string> response = std::make_shared<std::string>();
+    get_response(url, response);  // set response
+
+    std::string min;
+    std::string max;
+
+    std::vector<const char*> divTag;
+    divTag.push_back("data-test=\"dailyRange\"");
+    divTag.push_back("class=\"key-info_dd-numeric__5IsvY\"");
+    divTag.push_back("span");
+    get_tagdata_from_response(divTag, response, min);
+
+    divTag.clear();
+    divTag.push_back("data-test=\"dailyRange\"");
+    divTag.push_back("class=\"key-info_dd-numeric__5IsvY\"");
+    divTag.push_back("class=\"key-info_dd-numeric__5IsvY\"");
+    divTag.push_back("span");
+    get_tagdata_from_response(divTag, response, max);
+
+    _getDayRangePrice = min;
+    _getDayRangePrice.append(" - " + max);
+
+    return _getDayRangePrice;
 }
 
-std::string sa::get_52w_range_price()
+std::string sa::get_52w_range_price(std::string stockName)
 {
-    return "54321.09876";
+    std::string url = "https://www.investing.com/equities/";
+    url.append(stockName);
+    std::shared_ptr<std::string> response = std::make_shared<std::string>();
+    get_response(url, response);  // set response
+
+    std::string min;
+    std::string max;
+
+    std::vector<const char*> divTag;
+    divTag.push_back("data-test=\"weekRange\"");
+    divTag.push_back("class=\"key-info_dd-numeric__5IsvY\"");
+    divTag.push_back("span");
+    get_tagdata_from_response(divTag, response, min);
+
+    divTag.clear();
+    divTag.push_back("data-test=\"weekRange\"");
+    divTag.push_back("class=\"key-info_dd-numeric__5IsvY\"");
+    divTag.push_back("class=\"key-info_dd-numeric__5IsvY\"");
+    divTag.push_back("span");
+    get_tagdata_from_response(divTag, response, max);
+
+    _getWeekRangePrice = min;
+    _getWeekRangePrice.append(" - " + max);
+
+    return _getWeekRangePrice;
 }
 
-std::string sa::get_absolute_change()
+std::string sa::get_absolute_change(std::string stockName)
 {
-    return "54321.09876";
+    std::string url = "https://www.investing.com/equities/";
+    url.append(stockName);
+    std::shared_ptr<std::string> response = std::make_shared<std::string>();
+    get_response(url, response);  // set response
+
+    std::string sign;
+    std::string val;
+
+    std::vector<const char*> divTag;
+    divTag.push_back("data-test=\"instrument-price-change\"");
+    get_tagdata_from_response(divTag, response, sign);
+
+    divTag.clear();
+    divTag.push_back("data-test=\"instrument-price-change\"");
+    divTag.push_back("!--");
+    get_tagdata_from_response(divTag, response, val);
+
+    _getAbsChangePrice = sign;
+    _getAbsChangePrice.append(val);
+
+    return _getAbsChangePrice;
 }
 
-std::string sa::get_procent_change()
+std::string sa::get_procent_change(std::string stockName)
 {
-    return "54321.09876";
+    std::string url = "https://www.investing.com/equities/";
+    url.append(stockName);
+    std::shared_ptr<std::string> response = std::make_shared<std::string>();
+    get_response(url, response);  // set response
+
+    std::string sign;
+    std::string val;
+
+    std::vector<const char*> divTag;
+    divTag.push_back("data-test=\"instrument-price-change-percent\"");
+    divTag.push_back("!--");
+    get_tagdata_from_response(divTag, response, sign);
+
+    divTag.clear();
+    divTag.push_back("data-test=\"instrument-price-change-percent\"");
+    divTag.push_back("!--");
+    divTag.push_back("!--");
+    get_tagdata_from_response(divTag, response, val);
+
+    _getProcentChangePrice = sign;
+    _getProcentChangePrice.append(val);
+
+    return _getProcentChangePrice;
 }
 
 // ***************** STATIC ***************** \\
@@ -128,15 +228,21 @@ static void get_response(std::string url, std::shared_ptr<std::string> resp)
 static void get_tagdata_from_response(std::vector<const char *> tagClass, std::shared_ptr<std::string> resp, std::string &data)
 {
     data = "Missing data";
+    const unsigned int val = static_cast<unsigned int>(0xff);
+    size_t estimatedRespSize = tagClass.size() * val;
     std::size_t found = (*resp).find(tagClass.front());
     if (found == std::string::npos) return;
-    std::string localResp = (*resp).substr(found, 100);
+    size_t sts = strlen(tagClass.front());
+    std::string localResp = (*resp).substr(found + (sts), estimatedRespSize);
 
     for (auto singleTag = std::next(tagClass.begin()); singleTag != tagClass.end(); singleTag++)
     {
-        found = localResp.find(*singleTag);
+        if (estimatedRespSize > val) estimatedRespSize -= val;
+        char* tmp = const_cast<char *>(*singleTag);
+        found = localResp.find(tmp);
         if (found == std::string::npos) return;
-        localResp = localResp.substr(found, 100);
+        sts = strlen(tmp);
+        localResp = localResp.substr(found + (sts), estimatedRespSize);
     }
     
     std::size_t begin = localResp.find(">");

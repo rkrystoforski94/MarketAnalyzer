@@ -21,14 +21,14 @@ namespace sa {
 
     extern "C" STOCKAPIH_API std::string get_prev_close_price(std::string stockName);
 
-    extern "C" STOCKAPIH_API std::string get_open_price();
+    extern "C" STOCKAPIH_API std::string get_open_price(std::string stockName);
 
-    extern "C" STOCKAPIH_API std::string get_day_range_price();
+    extern "C" STOCKAPIH_API std::string get_day_range_price(std::string stockName);
 
-    extern "C" STOCKAPIH_API std::string get_52w_range_price();
+    extern "C" STOCKAPIH_API std::string get_52w_range_price(std::string stockName);
 
-    extern "C" STOCKAPIH_API std::string get_absolute_change();
+    extern "C" STOCKAPIH_API std::string get_absolute_change(std::string stockName);
 
-    extern "C" STOCKAPIH_API std::string get_procent_change();
+    extern "C" STOCKAPIH_API std::string get_procent_change(std::string stockName);
 
 }
