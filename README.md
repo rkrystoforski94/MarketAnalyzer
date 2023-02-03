@@ -17,3 +17,7 @@ If you decide this note is not required or important for this project, please re
 If you don't mind,  leave it as it is. In the future, there should be installation/use instructions.
 
 
+To get subomdule:
+cd FastHTML/
+git submodule init
+git submodule update

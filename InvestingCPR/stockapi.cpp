@@ -10,6 +10,8 @@
 #include <string>
 #include <cpr/cpr.h>
 
+#include "../../FastHTML/include/FastHTML.h"
+
 void get_response(std::string url, std::shared_ptr<std::string> resp);
 void get_tagdata_from_response(std::vector<const char*> tagClass, std::shared_ptr<std::string> resp, std::string& data);
 
@@ -59,14 +61,25 @@ bool sa::test_request()
 
 std::string sa::get_stock_price(std::string stockName)
 {
-    std::string url = "https://www.investing.com/equities/";
-    url.append(stockName);
+    std::string url = "https://www.investing.com/equities/" + stockName;
+    //url.append(stockName);
     std::shared_ptr<std::string> response = std::make_shared<std::string>();
     get_response(url, response);  // set response
 
-    std::vector<const char*> divTag;
-    divTag.push_back("instrument-price-last");
-    get_tagdata_from_response(divTag, response, _getStockPrice);
+    std::pair<std::string, std::map<std::string, std::string>> filter;
+    filter.first = "span";
+    filter.second["data-test"] = "instrument-price-last";
+    HResponse obj1(response.get(), filter);
+    _getStockPrice = obj1.GetLastData();
+    if (_getStockPrice == "UPS") { // To fast might cause missing data, not full html site
+        std::vector<const char*> divTag;
+        divTag.push_back("instrument-price-last");
+        get_tagdata_from_response(divTag, response, _getStockPrice);
+    }
+
+    //std::vector<const char*> divTag;
+    //divTag.push_back("instrument-price-last");
+    //get_tagdata_from_response(divTag, response, _getStockPrice);
 
     return _getStockPrice;
 }
