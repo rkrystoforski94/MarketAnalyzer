@@ -60,7 +60,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(Qt_INCLUDEPATH_);./InvestingCPR;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(ProjectDir)include;$(ProjectDir);%(AdditionalIncludeDirectories);$(Qt_INCLUDEPATH_);./InvestingCPR</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PreprocessorDefinitions>LOG_TO_FILE=1;DBG_MODE</PreprocessorDefinitions>
     </ClCompile>
@@ -101,6 +101,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\StockData.cpp" />
     <QtRcc Include="MainApp\MarketAnal.qrc" />
     <QtUic Include="MainApp\MarketAnal.ui" />
     <QtMoc Include="MainApp\MarketAnal.h" />
@@ -109,8 +110,10 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\StockData.h" />
     <ClInclude Include="Log\Log.h" />
     <ClInclude Include="MainApp\IDataApi.h" />
+    <ClInclude Include="include\PredefinedData.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="InvestingCPR\InvestingCPR.vcxproj">
