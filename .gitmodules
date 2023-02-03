@@ -1,0 +1,3 @@
+[submodule "FastHTML"]
+	path = FastHTML
+	url = https://github.com/ziajek444/FastHTML
