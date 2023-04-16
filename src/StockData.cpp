@@ -19,37 +19,42 @@ StockData::~StockData()
 {
 }
 
-std::string StockData::GetCurrentPrice()
+std::string StockData::GetCurrentPrice(std::shared_ptr<std::string> response)
 {
-	return ApiGetCurrentPrice(this->stockShortName);
+	return ApiGetCurrentPrice(response);
 }
 
-std::string StockData::GetPrevClosePrice()
+std::string StockData::GetPrevClosePrice(std::shared_ptr<std::string> response)
 {
-	return ApiGetPrevClosePrice(this->stockShortName);
+	return ApiGetPrevClosePrice(response);
 }
 
-std::string StockData::GetOpenPrice()
+std::string StockData::GetOpenPrice(std::shared_ptr<std::string> response)
 {
-	return ApiGetOpenPrice(this->stockShortName);
+	return ApiGetOpenPrice(response);
 }
 
-std::string StockData::GetDayRangePrice()
+std::string StockData::GetDayRangePrice(std::shared_ptr<std::string> response)
 {
-	return ApiGetDayRangePrice(this->stockShortName);
+	return ApiGetDayRangePrice(response);
 }
 
-std::string StockData::Get52wRangePrice()
+std::string StockData::Get52wRangePrice(std::shared_ptr<std::string> response)
 {
-	return ApiGet52wRangePrice(this->stockShortName);
+	return ApiGet52wRangePrice(response);
 }
 
-std::string StockData::GetAbsoluteChange()
+std::string StockData::GetAbsoluteChange(std::shared_ptr<std::string> response)
 {
-	return ApiGetAbsoluteChange(this->stockShortName);
+	return ApiGetAbsoluteChange(response);
 }
 
-std::string StockData::GetProcentChange()
+std::string StockData::GetProcentChange(std::shared_ptr<std::string> response)
 {
-	return ApiGetProcentChange(this->stockShortName);
+	return ApiGetProcentChange(response);
+}
+
+std::string StockData::RefreshData()
+{
+	return ApiRefreshData(this->stockShortName);
 }

@@ -1,4 +1,5 @@
 #include "stockapi.h"
+#include "stockapi.h"
 // plikH.cpp : Defines the exported functions for the DLL.
 #include "pch.h" // use stdafx.h in Visual Studio 2017 and earlier
 #include <utility>
@@ -27,7 +28,7 @@
 #include <algorithm>
 #include <cctype>
 
-void get_response(std::string url, std::shared_ptr<std::string> resp);
+
 void get_tagdata_from_response(std::vector<const char*> tagClass, std::shared_ptr<std::string> resp, std::string& data);
 std::string removeBrackets(std::string str);
 
@@ -59,28 +60,8 @@ unsigned long long sa::get_previous_()
     return previous_;
 }
 
-bool sa::test_request()
+std::string sa::get_stock_price(std::shared_ptr<std::string> response)
 {
-    std::cout << "Czyli co, tutaj musze pisac?" << '\n';
-
-    cpr::Response r = cpr::Get(cpr::Url{ "https://api.github.com/repos/whoshuu/cpr/contributors" },
-        cpr::Authentication{ "user", "pass", cpr::AuthMode::BASIC },
-        cpr::Parameters{ {"anon", "true"}, {"key", "value"} });
-    std::cout << "Status code: " << r.status_code << '\n';
-    std::cout << "Header:\n";
-    for (const std::pair<const std::basic_string<char>, std::basic_string<char>>& kv : r.header) {
-        std::cout << '\t' << kv.first << ':' << kv.second << '\n';
-    }
-    std::cout << "Text: " << r.text << '\n';
-    return true;
-}
-
-std::string sa::get_stock_price(std::string stockName)
-{
-    std::string url = "https://www.investing.com/equities/" + stockName;
-    std::shared_ptr<std::string> response = std::make_shared<std::string>();
-    get_response(url, response);  // set response
-
     std::pair<std::string, std::map<std::string, std::string>> filter;
     filter.first = "span";
     filter.second["data-test"] = "instrument-price-last";
@@ -90,15 +71,8 @@ std::string sa::get_stock_price(std::string stockName)
     return _getStockPrice;
 }
 
-std::string sa::get_prev_close_price(std::string stockName)
+std::string sa::get_prev_close_price(std::shared_ptr<std::string> response)
 {
-    std::string url = "https://www.investing.com/equities/" + stockName;
-    std::shared_ptr<std::string> response = std::make_shared<std::string>();
-    get_response(url, response);  // set response
-
-    //<dd data-test="sharesOutstanding" class="font-bold">
-    // <span class="key-info_dd-numeric__5IsvY"><span>
-    //
     std::pair<std::string, std::map<std::string, std::string>> filter;
     filter.first = "dd";
     filter.second["data-test"] = "prevClose";
@@ -121,15 +95,8 @@ std::string sa::get_prev_close_price(std::string stockName)
     return _getPrevClosePrice;
 }
 
-std::string sa::get_open_price(std::string stockName)
+std::string sa::get_open_price(std::shared_ptr<std::string> response)
 {
-    std::string url = "https://www.investing.com/equities/" + stockName;
-    std::shared_ptr<std::string> response = std::make_shared<std::string>();
-    get_response(url, response);  // set response
-
-    // <dd data-test="open" class="font-bold"><span class="key-info_dd-numeric__5IsvY">
-    // <span>183.95</span><span></span></span></dd>
-    //
     std::pair<std::string, std::map<std::string, std::string>> filter;
     filter.first = "dd";
     filter.second["data-test"] = "open";
@@ -153,25 +120,11 @@ std::string sa::get_open_price(std::string stockName)
     return _getOpenPrice;
 }
 
-std::string sa::get_day_range_price(std::string stockName)
+std::string sa::get_day_range_price(std::shared_ptr<std::string> response)
 {
-    std::string url = "https://www.investing.com/equities/" + stockName;
-    std::shared_ptr<std::string> response = std::make_shared<std::string>();
-    get_response(url, response);  // set response
-
     std::string min;
     std::string max;
 
-    //<dd data-test="dailyRange" class="font-bold">
-    // <span class="key-info_dd-numeric__5IsvY">
-    // <span>359</span>
-    // <span></span></span>
-    // <span class="ml-1 mr-1">-</span>
-    // <span class="key-info_dd-numeric__5IsvY">
-    // <span>379.43</span>
-    // <span></span></span>
-    //</dd>
-    //
     std::pair<std::string, std::map<std::string, std::string>> filter;
     filter.first = "dd";
     filter.second["data-test"] = "dailyRange";
@@ -202,24 +155,11 @@ std::string sa::get_day_range_price(std::string stockName)
     return _getDayRangePrice;
 }
 
-std::string sa::get_52w_range_price(std::string stockName)
+std::string sa::get_52w_range_price(std::shared_ptr<std::string> response)
 {
-    std::string url = "https://www.investing.com/equities/" + stockName;
-    std::shared_ptr<std::string> response = std::make_shared<std::string>();
-    get_response(url, response);  // set response
-
     std::string min;
     std::string max;
 
-    // 
-    //<dd data-test="weekRange" class="font-bold">
-    // <span class="key-info_dd-numeric__5IsvY">
-    // <span>162.71</span><span></span></span>
-    // <span class="ml-1 mr-1">-</span>
-    // <span class="key-info_dd-numeric__5IsvY">
-    // <span>412.98</span><span></span></span>
-    //</dd>
-    //
     std::pair<std::string, std::map<std::string, std::string>> filter;
     filter.first = "dd";
     filter.second["data-test"] = "weekRange";
@@ -251,17 +191,8 @@ std::string sa::get_52w_range_price(std::string stockName)
     return _getWeekRangePrice;
 }
 
-std::string sa::get_absolute_change(std::string stockName)
+std::string sa::get_absolute_change(std::shared_ptr<std::string> response)
 {
-    std::string url = "https://www.investing.com/equities/" + stockName;
-    std::shared_ptr<std::string> response = std::make_shared<std::string>();
-    get_response(url, response);  // set response
-
-    //<div class="text-xl flex items-end flex-wrap">
-    // <span class="instrument-price_change-value__h13Qh ml-2.5 text-negative-main" data-test="instrument-price-change">-0.99</span>
-    // <span class="instrument-price_change-percent__bT4yt ml-2.5 text-negative-main" data-test="instrument-price-change-percent">(-0.27%)</span>
-    //</div>
-    //
     std::pair<std::string, std::map<std::string, std::string>> filter;
     filter.first = "div";
     filter.second["class"] = "text-xlflexitems-endflex-wrap"; // no spaces
@@ -278,17 +209,8 @@ std::string sa::get_absolute_change(std::string stockName)
     return _getAbsChangePrice;
 }
 
-std::string sa::get_procent_change(std::string stockName)
+std::string sa::get_procent_change(std::shared_ptr<std::string> response)
 {
-    std::string url = "https://www.investing.com/equities/" + stockName;
-    std::shared_ptr<std::string> response = std::make_shared<std::string>();
-    get_response(url, response);  // set response
-
-    //<div class="text-xl flex items-end flex-wrap">
-    // <span class="instrument-price_change-value__h13Qh ml-2.5 text-negative-main" data-test="instrument-price-change">-0.99</span>
-    // <span class="instrument-price_change-percent__bT4yt ml-2.5 text-negative-main" data-test="instrument-price-change-percent">(-0.27%)</span>
-    //</div>
-    //
     std::pair<std::string, std::map<std::string, std::string>> filter;
     filter.first = "div";
     filter.second["class"] = "text-xlflexitems-endflex-wrap"; // no spaces
@@ -301,21 +223,27 @@ std::string sa::get_procent_change(std::string stockName)
     HResponse obj2(&s, filter);
 
     _getProcentChangePrice = removeBrackets(obj2.GetLastData()); // queue sensetive
+    _getProcentChangePrice = EraseComments(_getProcentChangePrice);
 
     return _getProcentChangePrice;
 }
 
-// ***************** STATIC ***************** \\
-
-static void get_response(std::string url, std::shared_ptr<std::string> resp)
+std::string sa::get_response_string(std::string stockName)
 {
+    std::string url = "https://www.investing.com/equities/" + stockName;
+    std::shared_ptr<std::string> resp = std::make_shared<std::string>();
+
     cpr::Response r = cpr::Get(
         cpr::Url{ url },
         cpr::Authentication{ "user", "pass", cpr::AuthMode::BASIC },
         cpr::Parameters{ {"anon", "true"}, {"key", "value"} },
         cpr::Header{ {"accept", "application/json"}, {"User - Agent", "Mozilla / 5.0 (Windows NT 10.0; Win64; x64) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 108.0.0.0 Safari / 537.36"} });
-    *resp = r.text;  // Unicode is probably handed by CPR
+    //*resp = r.text;  // Unicode is probably handed by CPR
+
+    return r.text;
 }
+
+// ***************** STATIC ***************** \\
 
 static void get_tagdata_from_response(std::vector<const char *> tagClass, std::shared_ptr<std::string> resp, std::string &data)
 {
