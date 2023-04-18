@@ -31,33 +31,36 @@ private:
     double procChange;
 
 public:
-    std::string GetCurrentPrice();
-    std::string GetPrevClosePrice();
-    std::string GetOpenPrice();
-    std::string GetDayRangePrice();
-    std::string Get52wRangePrice();
-    std::string GetAbsoluteChange();
-    std::string GetProcentChange();
+    std::string GetCurrentPrice(std::shared_ptr<std::string> response);
+    std::string GetPrevClosePrice(std::shared_ptr<std::string> response);
+    std::string GetOpenPrice(std::shared_ptr<std::string> response);
+    std::string GetDayRangePrice(std::shared_ptr<std::string> response);
+    std::string Get52wRangePrice(std::shared_ptr<std::string> response);
+    std::string GetAbsoluteChange(std::shared_ptr<std::string> response);
+    std::string GetProcentChange(std::shared_ptr<std::string> response);
+    std::string RefreshData();
 
     // to do add last update -> ret date
     // geter fields
     // update( database )
 private:
 #ifdef INVESTING_COM_API
-    std::string(*ApiGetCurrentPrice)(std::string) = sa::get_stock_price;
-    std::string(*ApiGetPrevClosePrice)(std::string) = sa::get_prev_close_price;
-    std::string(*ApiGetOpenPrice)(std::string) = sa::get_open_price;
-    std::string(*ApiGetDayRangePrice)(std::string) = sa::get_day_range_price;
-    std::string(*ApiGet52wRangePrice)(std::string) = sa::get_52w_range_price;
-    std::string(*ApiGetAbsoluteChange)(std::string) = sa::get_absolute_change;
-    std::string(*ApiGetProcentChange)(std::string) = sa::get_procent_change;
+    std::string(*ApiGetCurrentPrice)(std::shared_ptr<std::string> response) = sa::get_stock_price;
+    std::string(*ApiGetPrevClosePrice)(std::shared_ptr<std::string> response) = sa::get_prev_close_price;
+    std::string(*ApiGetOpenPrice)(std::shared_ptr<std::string> response) = sa::get_open_price;
+    std::string(*ApiGetDayRangePrice)(std::shared_ptr<std::string> response) = sa::get_day_range_price;
+    std::string(*ApiGet52wRangePrice)(std::shared_ptr<std::string> response) = sa::get_52w_range_price;
+    std::string(*ApiGetAbsoluteChange)(std::shared_ptr<std::string> response) = sa::get_absolute_change;
+    std::string(*ApiGetProcentChange)(std::shared_ptr<std::string> response) = sa::get_procent_change;
+    std::string(*ApiRefreshData)(std::string stockName) = sa::get_response_string;
 #else
-    std::string(*ApiGetCurrentPrice)(std::string);
-    std::string(*ApiGetPrevClosePrice)(std::string);
-    std::string(*ApiGetOpenPrice)(std::string);
-    std::string(*ApiGetDayRangePrice)(std::string);
-    std::string(*ApiGet52wRangePrice)(std::string);
-    std::string(*ApiGetAbsoluteChange)(std::string);
-    std::string(*ApiGetProcentChange)(std::string);
+    std::string(*ApiGetCurrentPrice)(std::shared_ptr<std::string> response);
+    std::string(*ApiGetPrevClosePrice)(std::shared_ptr<std::string> response);
+    std::string(*ApiGetOpenPrice)(std::shared_ptr<std::string> response);
+    std::string(*ApiGetDayRangePrice)(std::shared_ptr<std::string> response);
+    std::string(*ApiGet52wRangePrice)(std::shared_ptr<std::string> response);
+    std::string(*ApiGetAbsoluteChange)(std::shared_ptr<std::string> response);
+    std::string(*ApiGetProcentChange)(std::shared_ptr<std::string> response);
+    std::string(*ApiRefreshData)(std::string stockName);
 #endif
 };
